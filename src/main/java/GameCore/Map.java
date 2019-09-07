@@ -26,9 +26,12 @@ public class Map {
     }
 
 
-    public void addShip(Ship ship, String position) {
+    public boolean addShip(Ship ship, String position) {
         int xPosition = (int) position.charAt(0) % 48;
         int yPosition = (int) position.charAt(1) % 65;
+
+        if (checkShipsCollisions(ship, xPosition, yPosition) == false)
+            return false;
 
         if (ship.getOrientation().equals(Orientation.HORIZONTAL) && checkShipsCollisions(ship, xPosition, yPosition)) {
             for (int i = 0; i < ship.getLength(); i++) {
@@ -37,13 +40,16 @@ public class Map {
             }
             lives += ship.getLength();
             printMap();
+            return true;
         } else if (checkShipsCollisions(ship, xPosition, yPosition)) {
             for (int i = 0; i < ship.getLength(); i++) {
                 mapMask[xPosition + i][yPosition] = "X";
             }
             lives += ship.getLength();
             printMap();
+            return true;
         }
+        return false;
     }
 
     private boolean checkShipsCollisions(Ship ship, int xPosition, int yPosition) {
