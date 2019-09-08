@@ -41,9 +41,11 @@ public class Map {
             lives += ship.getLength();
             printMap();
             return true;
-        } else if (checkShipsCollisions(ship, xPosition, yPosition)) {
+        }
+        if (ship.getOrientation().equals(Orientation.VERTICAL) && checkShipsCollisions(ship, xPosition, yPosition)) {
             for (int i = 0; i < ship.getLength(); i++) {
                 mapMask[xPosition + i][yPosition] = "X";
+                surroundPositionsWithTakenSpace(ship, xPosition, yPosition);
             }
             lives += ship.getLength();
             printMap();
@@ -53,19 +55,37 @@ public class Map {
     }
 
     private boolean checkShipsCollisions(Ship ship, int xPosition, int yPosition) {
-           for (int i = 0; i < ship.getLength() + 1; i++)
-               for (int j = 0; j < 2; j++) {
-                   if (mapPositions[xPosition + 1 + j][yPosition + 1 + i] == false)
-                       return false;
-               }
-           return true;
+        if (ship.getOrientation() == Orientation.HORIZONTAL) {
+            for (int i = 0; i < ship.getLength() + 1; i++)
+                for (int j = 0; j < 2; j++) {
+                    if (mapPositions[xPosition + 1 + j][yPosition + 1 + i] == false)
+                        return false;
+                }
+            return true;
+        }
+        //for VERTICAL orientation do following:
+        for (int i = 0; i < 2; i++)
+            for (int j = 0; j < ship.getLength() + 1; j++) {
+                if (mapPositions[xPosition + 1 + j][yPosition + 1 + i] == false)
+                    return false;
+            }
+        return true;
     }
 
     private void surroundPositionsWithTakenSpace(Ship ship, int xPosition, int yPosition) {
+        if (ship.getOrientation() == Orientation.HORIZONTAL) {
             for (int i = -1; i < ship.getLength() + 1; i++)
                 for (int j = -1; j < 2; j++) {
                     mapPositions[xPosition + 1 + j][yPosition + 1 + i] = false;
                 }
+        }
+        if (ship.getOrientation() == Orientation.VERTICAL) {
+            System.out.println("here");
+            for (int i = -1; i < 2; i++)
+                for (int j = -1; j < ship.getLength() + 1; j++) {
+                    mapPositions[xPosition + 1 + j][yPosition + 1 + i] = false;
+                }
+        }
     }
 
     public void shootShip(String position) {
