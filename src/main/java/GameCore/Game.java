@@ -4,11 +4,8 @@ public class Game {
 
     public static void main(String[] args) {
 
-        Ship ship = new Ship(1, Orientation.HORIZONTAL);
-        Ship ship3 = new Ship(2, Orientation.HORIZONTAL);
-        Ship ship2 = new Ship(2, Orientation.HORIZONTAL);
 
-        Map map = new Map();
+/*        Map map = new Map();
 
         map.addShip(ship, "8E");
         map.addShip(ship3, "0D");
@@ -17,8 +14,11 @@ public class Game {
 
         map.printPositionsMap();
 
-/*        AI ai = new AI();
+        AI ai = new AI();
         ai.mapAI.printMap();*/
+
+        Player player = new Player();
+        player.setUpFleet();
 
     }
 }

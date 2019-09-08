@@ -1,28 +1,26 @@
 package GameCore;
 
-import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class AI {
 
     public AI() {
-
         setShipsOnMap();
     }
 
 
-    Ship carrier = new Ship(5, Orientation.HORIZONTAL);
-    Ship battleship = new Ship(4, Orientation.HORIZONTAL);
-    Ship crusier = new Ship(3, Orientation.HORIZONTAL);
-    Ship submarine = new Ship(3, Orientation.HORIZONTAL);
-    Ship destroyer = new Ship(2, Orientation.HORIZONTAL);
+    Ship carrier = new Ship(5, Orientation.HORIZONTAL, "carrier");
+    Ship battleship = new Ship(4, Orientation.HORIZONTAL, "battleship");
+    Ship cruiser = new Ship(3, Orientation.HORIZONTAL, "cruiser");
+    Ship submarine = new Ship(3, Orientation.HORIZONTAL, "submarine");
+    Ship destroyer = new Ship(2, Orientation.HORIZONTAL, "destroyer");
     Map mapAI = new Map();
 
 
     private void setShipsOnMap() {
         placeShipOnMap(carrier, randomPosition());
         placeShipOnMap(battleship, randomPosition());
-        placeShipOnMap(crusier, randomPosition());
+        placeShipOnMap(cruiser, randomPosition());
         placeShipOnMap(submarine, randomPosition());
         placeShipOnMap(destroyer, randomPosition());
     }
