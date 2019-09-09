@@ -12,13 +12,13 @@ public class Game {
         map.addShip(ship2, "2C");
         map.shootShip("4C");
 
-        map.printPositionsMap();
+        map.printPositionsMap();*/
 
         AI ai = new AI();
-        ai.mapAI.printMap();*/
+        ai.mapAI.printMap();
 
-        Player player = new Player();
-        player.setUpFleet();
+/*        Player player = new Player();
+        player.setUpFleet();*/
 
     }
 }

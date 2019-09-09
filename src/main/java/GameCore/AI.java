@@ -4,40 +4,34 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class AI {
 
+    Fleet fleet = new Fleet();
+    Map mapAI = new Map();
+
     public AI() {
         setShipsOnMap();
     }
-
-
-    Ship carrier = new Ship(5, Orientation.HORIZONTAL, "carrier");
-    Ship battleship = new Ship(4, Orientation.HORIZONTAL, "battleship");
-    Ship cruiser = new Ship(3, Orientation.HORIZONTAL, "cruiser");
-    Ship submarine = new Ship(3, Orientation.HORIZONTAL, "submarine");
-    Ship destroyer = new Ship(2, Orientation.HORIZONTAL, "destroyer");
-    Map mapAI = new Map();
-
-
     private void setShipsOnMap() {
-        placeShipOnMap(carrier, randomPosition());
-        placeShipOnMap(battleship, randomPosition());
-        placeShipOnMap(cruiser, randomPosition());
-        placeShipOnMap(submarine, randomPosition());
-        placeShipOnMap(destroyer, randomPosition());
+        fleet.ships.forEach(this::placeShipOnMap);
     }
-
-
     private String randomPosition() {
         int randomLetter = ThreadLocalRandom.current().nextInt(65, 75 + 1);
-        System.out.println((int) (Math.random() * 11) + String.valueOf((char) randomLetter));
         return (int) (Math.random() * 11) + String.valueOf((char) randomLetter);
     }
-
-    private void placeShipOnMap(Ship ship, String position){
+    private void randomOrientation(Ship ship){
+        double random = Math.random();
+        if (random > 0.5){
+            ship.setOrientation(Orientation.HORIZONTAL);
+        } else {
+            ship.setOrientation(Orientation.VERTICAL);
+        }
+    }
+    private void placeShipOnMap(Ship ship){
             try{
-                if (mapAI.addShip(ship, position) == false)
-                    placeShipOnMap(ship, randomPosition());
+                randomOrientation(ship);
+                if (mapAI.addShip(ship, randomPosition()) == false)
+                    placeShipOnMap(ship);
             } catch (IndexOutOfBoundsException e){
-                placeShipOnMap(ship, randomPosition());
+                placeShipOnMap(ship);
             }
     }
 }

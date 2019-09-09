@@ -30,6 +30,6 @@ public class Ship {
 
     @Override
     public String toString() {
-        return "Ship " + getName() + "with length: " + getLength() + ".";
+        return "Ship: " + getName() + ", length: " + getLength() + ".";
     }
 }

@@ -80,7 +80,6 @@ public class Map {
                 }
         }
         if (ship.getOrientation() == Orientation.VERTICAL) {
-            System.out.println("here");
             for (int i = -1; i < 2; i++)
                 for (int j = -1; j < ship.getLength() + 1; j++) {
                     mapPositions[xPosition + 1 + j][yPosition + 1 + i] = false;
