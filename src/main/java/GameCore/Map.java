@@ -101,14 +101,28 @@ public class Map {
     }
 
     public void printMap() {
-        System.out.println("Ship lives = " + lives);
+        System.out.print(headliner());
+        System.out.println();
         for (int i = 0; i < MAP_SIZE; i++) {
             for (int j = 0; j < MAP_SIZE; j++) {
-                System.out.print(mapMask[i][j] + "\t");
+                if (j == 0){
+                    System.out.print(i + "\t" + mapMask[i][j] + "\t");
+                } else {
+                    System.out.print(mapMask[i][j] + "\t");
+                }
             }
             System.out.println();
         }
         System.out.println("=====================================");
+    }
+
+    private String headliner(){
+        StringBuilder headliner = new StringBuilder();
+        headliner.append("\t");
+        for (int i = 65; i < 75; i++){
+            headliner.append((char) i + "\t");
+        }
+        return headliner.toString();
     }
 
     public void printPositionsMap() {
